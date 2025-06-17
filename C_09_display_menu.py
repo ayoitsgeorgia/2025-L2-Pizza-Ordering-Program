@@ -1,14 +1,13 @@
 import pandas
 
 # lists to hold ticket details
-all_pizzas = ["A", "B", "C", "D", "E"]
-all_prices = [7.50, 7.50, 10.50, 10.50, 6.50]
-all_surcharges = [0, 0, 5.53, 5.53, 0]
+all_pizzas = ["Cheese", "Pepperoni", "Margherita", "Meat Lovers", "BBQ Beef & Onion",
+              "Vegetarian", "Hawaiian", "Ham & Cheese", "Garlic Shrimp", "Chicken Cranberry"]
+all_prices = [7.50, 7.50, 10.50, 8.50, 7.50, 7.50, 7.50, 7.50, 10.50, 10.50]
 
 pizza_dict = {
     'Pizzas': all_pizzas,
     'Prices': all_prices,
-    'Surcharge': all_surcharges
 }
 
 # create dataframe / table from dictionary

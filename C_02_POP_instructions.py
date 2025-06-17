@@ -32,14 +32,15 @@ def instructions():
 
     print('''
 
-Welcome to the Pizza Order Program! To place your order, first choose whether you want pickup or delivery.
-If you select pickup, enter your name; if delivery, enter your name, address, and phone number (a delivery fee will be added).
-You may order up to 5 pizzas from a menu of 10 options, including gourmet pizzas, with prices shown.
-After selecting your pizzas, you can choose extra toppings for each one, which also have their own prices.
-Once you finish ordering, an itemised list of pizzas and extras with individual prices will be displayed, along with the total cost, including any delivery charge.
-If your order is for pickup, your name and phone number will be shown; if for delivery, your name, address, and phone number will be shown.
-Your name will be saved with a capital letter at the start and a full stop at the end. 
-You can then confirm or cancel your order, and choose to start another order or exit the program.
+Welcome to the Pizza Order Program! To place your order, first choose whether you want pickup or delivery. If you 
+select pickup, enter your name; if delivery, enter your name, address, and phone number (a delivery fee will be 
+added). You may order up to 5 pizzas from a menu of 10 options, including gourmet pizzas, with prices shown. After 
+selecting your pizzas, To stopped being asked what type of Pizza you want use the exit code "xxx". you can choose 
+extra toppings for each one, which also have their own prices. Once you finish ordering, an itemised list of pizzas 
+and extras with individual prices will be displayed, along with the total cost, including any delivery charge. If 
+your order is for pickup, your name and phone number will be shown; if for delivery, your name, address, 
+and phone number will be shown. Your name will be saved with a capital letter at the start and a full stop at the 
+end. You can then confirm or cancel your order, and choose to start another order or exit the program.
 
 
 

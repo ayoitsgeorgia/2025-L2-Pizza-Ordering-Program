@@ -125,11 +125,34 @@ pizza_dict = {
 
 }
 
+# lists to hold extras details
+
+all_extras_selected = []
+all_extras_selected_cost = []
+
+selected_extras_dict = {
+    'Extras': all_extras_selected,
+    'Prices ($)': all_extras_selected_cost
+}
+
+all_extras = ["Mushroom", "Pepperoni", "Pineapple", "BBQ Sauce", "Mozzarella"]
+
+all_extras_prices = [0.50, 1, 0.50, .50, 1]
+
+extras_dict = {
+    'Extras': all_extras,
+    'Prices ($)': all_extras_prices,
+}
+
+
 # create dataframe / table from dictionary
 pizza_frame = pandas.DataFrame(pizza_dict)
 
+extras_frame = pandas.DataFrame(extras_dict)
 # Rearranging index
 pizza_frame.index = np.arange(1, len(pizza_frame) + 1)
+
+extras_frame.index = np.arange(1, len(extras_frame) + 1)
 
 # Main routine goes here
 
@@ -161,11 +184,16 @@ print(make_statement("Menu", "-"))
 print()
 print(pizza_frame)
 
+print()
+print(make_statement("Extras", "-"))
+print()
+print(extras_frame)
+print()
 # Ask user to select their pizza
 
 for x in range(number_of_pizzas):
     print()
-    pizza_selected = num_check("Enter your choice: ", 1, 10)
+    pizza_selected = num_check("Enter your choice of pizzas: ", 1, 10)
 
     pizza_selected_name = all_pizzas[pizza_selected - 1]
     pizza_selected_cost = all_prices[pizza_selected - 1]
@@ -180,17 +208,27 @@ for x in range(number_of_pizzas):
     extras = yes_no("Would you like any extras? ")
 
     if extras == "yes" or extras == "Y":
-        print(make_statement("Extras", "-"))
         print()
-        print(pizza_frame)
+        extras_selected = num_check("Enter your choice of extras: ", 1, 5)
+
+        extras_selected_name = all_extras[extras_selected - 1]
+        extras_selected_cost = all_extras_prices[extras_selected - 1]
+
+        print(f'You have selected {extras_selected_name} ${extras_selected_cost}')
+
+        all_extras_selected.append(extras_selected_name)
+        all_extras_selected_cost.append(extras_selected_cost)
+
 
 # Display order details
 # create dataframe / table from dictionary
 selected_pizza_frame = pandas.DataFrame(selected_pizza_dict)
+
 
 # Rearranging index
 selected_pizza_frame.index = np.arange(1, len(selected_pizza_frame) + 1)
 print()
 print(selected_pizza_frame)
 
-print("The program has ended")
+print()
+print("Your order is being processed, if you would like to order more pizzas please rerun the program.")

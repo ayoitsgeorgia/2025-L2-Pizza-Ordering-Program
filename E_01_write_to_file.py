@@ -5,7 +5,7 @@ write_to = "{}.txt".format(file_name)
 text_file = open(write_to, "w+")
 
 # string to write to file...
-heading = "=== MMF Test ===\n"
+heading = "=== POP Test ===\n"
 content = "Random content"
 more = "A bit more content"
 

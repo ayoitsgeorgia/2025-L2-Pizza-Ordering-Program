@@ -65,7 +65,6 @@ def get_expenses(exp_type, how_many=1):
 
     # default amount for fixed expenses
     amount = how_many  # how_many defaults to 1
-    # how_much_question = "How much? $"
 
     # loop to get expenses
     while True:
@@ -135,12 +134,12 @@ def currency(x):
 
 # Main routine goes here
 
-quantity_made = num_check("Quantity being made : ",
-                          "integer")
+number_of_pizzas = num_check("How many Pizzas would you like to order? ",
+                             "integer")
 print()
 
-print("Getting Variable Costs...")
-variable_expenses = get_expenses("variable", quantity_made)
+print("Type of Pizza...")
+variable_expenses = get_expenses("variable", number_of_pizzas)
 print()
 
 variable_panda = variable_expenses[0]

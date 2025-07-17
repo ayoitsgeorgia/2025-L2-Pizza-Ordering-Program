@@ -16,15 +16,5 @@ pizza_frame = pandas.DataFrame(pizza_dict)
 # Rearranging index
 pizza_frame.index = np.arange(1, len(pizza_frame) + 1)
 
-# Calculate the total payable and profit for each ticket
-# pizza_frame['Total'] = pizza_frame['Ticket Price'] + pizza_frame['Surcharge']
-# pizza_frame['Profit'] = pizza_frame['Ticket Price'] - 5
-
-# Work out total paid and total profit
-# total_paid = pizza_frame['Total'].sum()
-# total_profit = pizza_frame['Profit'].sum()
-
 print(pizza_frame)
 print()
-# print(f"Total Paid: ${total_paid:.2f}")
-# print(f"Total Profit: ${total_profit:.2f}")

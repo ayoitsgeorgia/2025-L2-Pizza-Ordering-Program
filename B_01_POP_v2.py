@@ -1,6 +1,5 @@
 import pandas
 import numpy as np
-from tabulate import tabulate
 
 
 def make_statement(statement, decoration):
@@ -105,14 +104,19 @@ def currency(y):
 # Variables
 
 # lists to hold pizza details
-
-
 all_pizza_selected = []
 all_pizza_selected_cost = []
 
+# lists to hold extras details
+
+all_extras_selected = []
+all_extras_selected_cost = []
+
 selected_pizza_dict = {
     'Pizzas': all_pizza_selected,
-    'Prices ($)': all_pizza_selected_cost
+    'Pizza Prices ($)': all_pizza_selected_cost,
+    'Extras': all_extras_selected,
+    'Extra Prices ($)': all_extras_selected_cost,
 }
 
 all_pizzas = ["Cheese", "Pepperoni", "Margherita", "Meat Lovers", "BBQ Beef & Onion",
@@ -125,16 +129,6 @@ pizza_dict = {
 
 }
 
-# lists to hold extras details
-
-all_extras_selected = []
-all_extras_selected_cost = []
-
-selected_extras_dict = {
-    'Extras': all_extras_selected,
-    'Prices ($)': all_extras_selected_cost
-}
-
 all_extras = ["Mushroom", "Pepperoni", "Pineapple", "BBQ Sauce", "Mozzarella"]
 
 all_extras_prices = [0.50, 1, 0.50, .50, 1]
@@ -143,7 +137,6 @@ extras_dict = {
     'Extras': all_extras,
     'Prices ($)': all_extras_prices,
 }
-
 
 # create dataframe / table from dictionary
 pizza_frame = pandas.DataFrame(pizza_dict)
@@ -177,12 +170,25 @@ number_of_pizzas = num_check("How many pizzas are you ordering? ", 1, 5)
 print()
 
 # Ask if it's pick up or delivery
+name = not_blank("Enter a name for this order: ")
+print()
 
+pickup_or_delivery = yes_no("Is this order for pickup? ")
+if pickup_or_delivery == "yes":
+    print("You have selected Pickup")
+    print()
+    phone = not_blank("Enter a phone number for the order: ")
 
-# Ask for their name/ number
+else:
+    print("You have selected Delivery")
+    print()
+    phone = not_blank("Enter a phone number for the order: ")
+    print()
+    address = not_blank("Enter the address this order will be delivered to: ")
 
 # Display menu
 
+print()
 print(make_statement("Menu", "-"))
 print()
 print(pizza_frame)
@@ -223,25 +229,23 @@ for x in range(number_of_pizzas):
         all_extras_selected.append(extras_selected_name)
         all_extras_selected_cost.append(extras_selected_cost)
 
+    else:
 
-
-
-
-
+        all_extras_selected.append("No extras")
+        all_extras_selected_cost.append(0.0)
 
 # how to display table with pizza and extras and combined costs?
 
 # Display order details
 # create dataframe / table from dictionary
 selected_pizza_frame = pandas.DataFrame(selected_pizza_dict)
-selected_extras_frame = pandas.DataFrame(selected_extras_dict)
+
 
 # Rearranging index
 selected_pizza_frame.index = np.arange(1, len(selected_pizza_frame) + 1)
 print()
 print(selected_pizza_frame)
-print()
-print(selected_extras_frame)
+
 
 print()
 print("Your order is being processed, if you would like to order more pizzas please rerun the program.")

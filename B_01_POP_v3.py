@@ -76,10 +76,22 @@ def string_check(question, valid_answers=('yes', 'no'), num_letters=1):
         print(f"Please choose an option from {valid_answers}")
 
 
+def digit_check(question):
+    while True:
+        user_input = input(question)
+        if user_input.isdigit() and len(user_input) == 10:
+            try:
+                break
+            except ValueError:
+                print("Invalid input. Please enter an integer.")
+        else:
+            print("Invalid input. Please enter a 10-digit phone number.")
+
+
 def num_check(question, low, high):
     """ Checks that response is between a low and high boundary number"""
 
-    error = f"Please enter a number between {low} and {high}"
+    error = f"Please enter a number between {low} and {high} "
 
     while True:
 
@@ -102,6 +114,7 @@ def currency(y):
 
 
 # Variables
+DELIVERY_CHARGE = 14.50
 
 # lists to hold pizza details
 all_pizza_selected = []
@@ -177,12 +190,13 @@ pickup_or_delivery = yes_no("Is this order for pickup? ")
 if pickup_or_delivery == "yes":
     print("You have selected Pickup")
     print()
-    phone = not_blank("Enter a phone number for the order: ")
+    digit_check("Enter a phone number for the order: ")
 
 else:
     print("You have selected Delivery")
+    delivery = 'yes'
     print()
-    phone = not_blank("Enter a phone number for the order: ")
+    digit_check("Enter a phone number for the order: ")
     print()
     address = not_blank("Enter the address this order will be delivered to: ")
 
@@ -242,13 +256,33 @@ combined_order_total = sum(all_extras_selected_cost) + sum(all_pizza_selected_co
 # create dataframe / table from dictionary
 selected_pizza_frame = pandas.DataFrame(selected_pizza_dict)
 
-
 # Rearranging index
 selected_pizza_frame.index = np.arange(1, len(selected_pizza_frame) + 1)
 print()
 print(selected_pizza_frame)
 print(f'Total price: ${combined_order_total}')
 
+# ask user for payment method (cash / credit / ca / cr)
+payment_ans = ('cash', 'credit')
+# credit card surcharge (currently 5%)
+CREDIT_SURCHARGE = 0.05
+
+pay_method = string_check("Payment method: ", payment_ans, 2)
+
+if pay_method == "cash":
+    surcharge = 0
+
+# if paying by credit, calculate surcharge
+else:
+    surcharge = round(combined_order_total * CREDIT_SURCHARGE, 2)
+    combined_order_total += surcharge
+
+print(f"The surcharge is ${surcharge}, the total is ${combined_order_total}")
+
+# Add delivery fee
+if delivery == 'yes':
+    combined_order_total += DELIVERY_CHARGE
+    print(f"The delivery fee is ${DELIVERY_CHARGE}, the total is ${combined_order_total}")
 
 print()
 print("Your order is being processed, if you would like to order more pizzas please rerun the program.")

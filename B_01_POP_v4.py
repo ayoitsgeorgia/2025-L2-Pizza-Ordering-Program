@@ -160,129 +160,146 @@ pizza_frame.index = np.arange(1, len(pizza_frame) + 1)
 
 extras_frame.index = np.arange(1, len(extras_frame) + 1)
 
-# Main routine goes here
 
-# Main heading
-# assume we have no fixed expenses for now
-fixed_subtotal = 0
-fixed_panda_string = ""
+while True:
+    # Main routine goes here
 
-heading = make_statement("Pizza Ordering Program", "🍕")
-print(heading)
-print()
-# Ask user to see instructions
-want_instructions = yes_no("Would you like to see the instructions? ")
+    # Main heading
+    # assume we have no fixed expenses for now
+    fixed_subtotal = 0
+    fixed_panda_string = ""
 
-if want_instructions == "yes":
-    instructions()
-
-print()
-
-# Ask for the number of pizzas
-number_of_pizzas = num_check("How many pizzas are you ordering? ", 1, 5)
-print()
-
-# Ask if it's pick up or delivery
-name = not_blank("Enter a name for this order: ")
-print()
-
-pickup_or_delivery = yes_no("Is this order for pickup? ")
-if pickup_or_delivery == "yes":
-    print("You have selected Pickup")
+    heading = make_statement("Pizza Ordering Program", "🍕")
+    print(heading)
     print()
-    digit_check("Enter a phone number for the order: ")
+    # Ask user to see instructions
+    want_instructions = yes_no("Would you like to see the instructions? ")
 
-else:
-    print("You have selected Delivery")
-    delivery = 'yes'
+    if want_instructions == "yes":
+        instructions()
+
     print()
-    digit_check("Enter a phone number for the order: ")
+
+    # Ask for the number of pizzas
+    number_of_pizzas = num_check("How many pizzas are you ordering? ", 1, 5)
     print()
-    address = not_blank("Enter the address this order will be delivered to: ")
 
-# Display menu
-
-print()
-print(make_statement("Menu", "-"))
-print()
-print(pizza_frame)
-
-print()
-print(make_statement("Extras", "-"))
-print()
-print(extras_frame)
-print()
-
-# Ask user to select their pizza
-
-for x in range(number_of_pizzas):
+    # Ask if it's pick up or delivery
+    name = not_blank("Enter a name for this order: ")
     print()
-    pizza_selected = num_check("Enter your choice of pizzas: ", 1, 10)
 
-    pizza_selected_name = all_pizzas[pizza_selected - 1]
-    pizza_selected_cost = all_prices[pizza_selected - 1]
-
-    print(f'You have selected {pizza_selected_name} ${pizza_selected_cost}')
-
-    all_pizza_selected.append(pizza_selected_name)
-    all_pizza_selected_cost.append(pizza_selected_cost)
-
-    # ask user if they want extra toppings
-
-    extras = yes_no("Would you like any extras? ")
-
-    if extras == "yes" or extras == "Y":
+    pickup_or_delivery = yes_no("Is this order for pickup? ")
+    if pickup_or_delivery == "yes":
+        delivery = 'no'
+        print("You have selected Pickup")
         print()
-        extras_selected = num_check("Enter your choice of extras: ", 1, 5)
-
-        extras_selected_name = all_extras[extras_selected - 1]
-        extras_selected_cost = all_extras_prices[extras_selected - 1]
-
-        print(f'You have selected {extras_selected_name} ${extras_selected_cost}')
-
-        all_extras_selected.append(extras_selected_name)
-        all_extras_selected_cost.append(extras_selected_cost)
+        digit_check("Enter a phone number for the order: ")
 
     else:
+        print("You have selected Delivery")
+        delivery = 'yes'
+        print()
+        digit_check("Enter a phone number for the order: ")
+        print()
+        address = not_blank("Enter the address this order will be delivered to: ")
 
-        all_extras_selected.append("No extras")
-        all_extras_selected_cost.append(0.0)
+    # Display menu
 
-# how to display table with pizza and extras and combined costs?
+    print()
+    print(make_statement("Menu", "-"))
+    print()
+    print(pizza_frame)
 
-combined_order_total = sum(all_extras_selected_cost) + sum(all_pizza_selected_cost)
+    print()
+    print(make_statement("Extras", "-"))
+    print()
+    print(extras_frame)
+    print()
 
-# Display order details
-# create dataframe / table from dictionary
-selected_pizza_frame = pandas.DataFrame(selected_pizza_dict)
+    # Ask user to select their pizza
 
-# Rearranging index
-selected_pizza_frame.index = np.arange(1, len(selected_pizza_frame) + 1)
-print()
-print(selected_pizza_frame)
-print(f'Total price: ${combined_order_total}')
+    for x in range(number_of_pizzas):
+        print()
+        pizza_selected = num_check("Enter your choice of pizzas: ", 1, 10)
 
-# ask user for payment method (cash / credit / ca / cr)
-payment_ans = ('cash', 'credit')
-# credit card surcharge (currently 5%)
-CREDIT_SURCHARGE = 0.05
+        pizza_selected_name = all_pizzas[pizza_selected - 1]
+        pizza_selected_cost = all_prices[pizza_selected - 1]
 
-pay_method = string_check("Payment method: ", payment_ans, 2)
+        print(f'You have selected {pizza_selected_name} ${pizza_selected_cost}')
 
-if pay_method == "cash":
-    surcharge = 0
+        all_pizza_selected.append(pizza_selected_name)
+        all_pizza_selected_cost.append(pizza_selected_cost)
 
-# if paying by credit, calculate surcharge
-else:
-    surcharge = round(combined_order_total * CREDIT_SURCHARGE, 2)
-    combined_order_total += surcharge
+        # ask user if they want extra toppings
 
-print(f"The surcharge is ${surcharge}, the total is ${combined_order_total}")
+        extras = yes_no("Would you like any extras? ")
 
-# Add delivery fee
-if delivery == 'yes':
-    combined_order_total += DELIVERY_CHARGE
-    print(f"The delivery fee is ${DELIVERY_CHARGE}, the total is ${combined_order_total}")
+        if extras == "yes" or extras == "Y":
+            print()
+            extras_selected = num_check("Enter your choice of extras: ", 1, 5)
 
-print()
-print("Your order is being processed, if you would like to order more pizzas please rerun the program.")
+            extras_selected_name = all_extras[extras_selected - 1]
+            extras_selected_cost = all_extras_prices[extras_selected - 1]
+
+            print(f'You have selected {extras_selected_name} ${extras_selected_cost}')
+
+            all_extras_selected.append(extras_selected_name)
+            all_extras_selected_cost.append(extras_selected_cost)
+
+        else:
+
+            all_extras_selected.append("No extras")
+            all_extras_selected_cost.append(0.0)
+
+    # how to display table with pizza and extras and combined costs?
+
+    combined_order_total = sum(all_extras_selected_cost) + sum(all_pizza_selected_cost)
+
+    # Display order details
+    # create dataframe / table from dictionary
+    selected_pizza_frame = pandas.DataFrame(selected_pizza_dict)
+
+    # Rearranging index
+    selected_pizza_frame.index = np.arange(1, len(selected_pizza_frame) + 1)
+    print()
+    print(selected_pizza_frame)
+    print(f'Total price: ${combined_order_total}')
+
+    # ask user for payment method (cash / credit / ca / cr)
+    payment_ans = ('cash', 'credit')
+    # credit card surcharge (currently 10%)
+    CREDIT_SURCHARGE = 0.10
+
+    pay_method = string_check("Payment method: ", payment_ans, 2)
+
+    if pay_method == "cash":
+        surcharge = 0
+
+    # if paying by credit, calculate surcharge
+    else:
+        surcharge = round(combined_order_total * CREDIT_SURCHARGE, 2)
+        combined_order_total += surcharge
+
+    print(f"The surcharge is ${surcharge}, the total is ${combined_order_total}")
+
+    # Add delivery fee
+    if delivery == "yes":
+        combined_order_total += DELIVERY_CHARGE
+        print(f"The delivery fee is ${DELIVERY_CHARGE}")
+        print(f"The overall total is ${combined_order_total}")
+
+    print()
+    confirm = yes_no("Would you like to confirm your order? ")
+    if confirm == "yes":
+        print("Thank you for your order")
+
+    else:
+        print("your order has been canceled")
+
+
+    want_more = yes_no("Would you like to order any more pizzas? ")
+
+    if want_more != "yes":
+        break  # Exit the loop if the user does not enter yes
+
+

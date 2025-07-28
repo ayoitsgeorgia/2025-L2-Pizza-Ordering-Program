@@ -160,9 +160,14 @@ pizza_frame.index = np.arange(1, len(pizza_frame) + 1)
 
 extras_frame.index = np.arange(1, len(extras_frame) + 1)
 
-
 while True:
     # Main routine goes here
+
+    # CLEAR THE PREVIOUS ORDERS DATA
+    all_pizza_selected_cost.clear()
+    all_extras_selected_cost.clear()
+    all_extras_selected.clear()
+    all_pizza_selected.clear()
 
     # Main heading
     # assume we have no fixed expenses for now
@@ -296,10 +301,10 @@ while True:
     else:
         print("your order has been canceled")
 
-
     want_more = yes_no("Would you like to order any more pizzas? ")
 
     if want_more != "yes":
+        print()
+        print("The program has ended")
         break  # Exit the loop if the user does not enter yes
-
 

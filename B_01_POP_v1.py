@@ -1,6 +1,5 @@
 import pandas
 import numpy as np
-from tabulate import tabulate
 
 
 def make_statement(statement, decoration):

@@ -63,7 +63,6 @@ def get_expenses(exp_type, how_many):
     }
 
     # default amount to the 1 for fixed expenses and to avoid PEP 8 error for variable expenses
-    amount = 1
 
     # loop to get expenses
     while True:

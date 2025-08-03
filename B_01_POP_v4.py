@@ -307,4 +307,3 @@ while True:
         print()
         print("The program has ended")
         break  # Exit the loop if the user does not enter yes
-
